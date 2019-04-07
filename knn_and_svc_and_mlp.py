@@ -32,12 +32,12 @@ print("[INFO] features matrix: {:.1f}MB".format(data.nbytes / (1024 * 1000.0)))
 le = LabelEncoder()
 labels = le.fit_transform(labels)
 (trainX, testX, trainY, testY) = train_test_split(data, labels, test_size=0.25, random_state=42)
-
-#k-NN
-print("[INFO] evaluating k-NN classifier...")
-model = KNeighborsClassifier(n_neighbors=args["neighbors"], n_jobs=args["jobs"])
-model.fit(trainX, trainY)
-print(classification_report(testY, model.predict(testX), target_names=le.classes_))
+#
+# #k-NN
+# print("[INFO] evaluating k-NN classifier...")
+# model = KNeighborsClassifier(n_neighbors=args["neighbors"], n_jobs=args["jobs"])
+# model.fit(trainX, trainY)
+# print(classification_report(testY, model.predict(testX), target_names=le.classes_))
 
 
 #SVC
@@ -49,14 +49,12 @@ acc = model.score(trainX, trainY)
 print("[INFO] SVM-SVC raw pixel accuracy: {:.2f}%".format(acc * 100))
 
 
-
 #MLP
-print("\n")
-print("[INFO] evaluating MLP classifier...")
-model = MLPClassifier(hidden_layer_sizes=(50,), max_iter=1000, alpha=1e-4,
-                      solver='sgd', tol=1e-4, random_state=1,
-                      learning_rate_init=.1)
-model.fit(trainX, trainY)
-acc = model.score(trainX, trainY)
-print("[INFO] neural network raw pixel accuracy: {:.2f}%".format(acc * 100))
-
+# print("\n")
+# print("[INFO] evaluating MLP classifier...")
+# model = MLPClassifier(hidden_layer_sizes=(50,), max_iter=1000, alpha=1e-4,
+#                       solver='sgd', tol=1e-4, random_state=1,
+#                       learning_rate_init=.1)
+# model.fit(trainX, trainY)
+# acc = model.score(trainX, trainY)
+# print("[INFO] neural network raw pixel accuracy: {:.2f}%".format(acc * 100))
