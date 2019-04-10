@@ -4,7 +4,6 @@ from sklearn.neighbors import KNeighborsClassifier
 from sklearn.preprocessing import LabelEncoder
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import classification_report
-from sklearn.neural_network import MLPClassifier
 from sklearn.svm import SVC
 from preprocessing.preprocessor import Preprocessor
 from datasets.datasetloader import DatasetLoader
@@ -32,29 +31,18 @@ print("[INFO] features matrix: {:.1f}MB".format(data.nbytes / (1024 * 1000.0)))
 le = LabelEncoder()
 labels = le.fit_transform(labels)
 (trainX, testX, trainY, testY) = train_test_split(data, labels, test_size=0.25, random_state=42)
-#
-# #k-NN
+
+#k-NN
 # print("[INFO] evaluating k-NN classifier...")
 # model = KNeighborsClassifier(n_neighbors=args["neighbors"], n_jobs=args["jobs"])
 # model.fit(trainX, trainY)
 # print(classification_report(testY, model.predict(testX), target_names=le.classes_))
 
 
-#SVC
+#SVM
 print("\n")
-print("[INFO] evaluating SVC classifier...")
+print("[INFO] evaluating SVM classifier...")
 model = SVC(max_iter=1000,class_weight='balanced')
 model.fit(trainX, trainY)
-acc = model.score(trainX, trainY)
+acc = model.score(testX, testY)
 print("[INFO] SVM-SVC raw pixel accuracy: {:.2f}%".format(acc * 100))
-
-
-#MLP
-# print("\n")
-# print("[INFO] evaluating MLP classifier...")
-# model = MLPClassifier(hidden_layer_sizes=(50,), max_iter=1000, alpha=1e-4,
-#                       solver='sgd', tol=1e-4, random_state=1,
-#                       learning_rate_init=.1)
-# model.fit(trainX, trainY)
-# acc = model.score(trainX, trainY)
-# print("[INFO] neural network raw pixel accuracy: {:.2f}%".format(acc * 100))

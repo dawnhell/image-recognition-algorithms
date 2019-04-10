@@ -6,7 +6,6 @@ from keras.layers import Dense, Dropout, Flatten, Conv2D, MaxPooling2D
 from keras import backend as k
 import matplotlib.pyplot as plt
 import numpy as np
-import os
 
 #load mnist dataset
 (X_train, y_train), (X_test, y_test) = mnist.load_data()
@@ -23,7 +22,7 @@ for i in range(9):
 
 print(fig)
 
-# let's print the actual data shape before we reshape and normalize
+# print the actual data shape before we reshape and normalize
 print("X_train shape", X_train.shape)
 print("y_train shape", y_train.shape)
 print("X_test shape", X_test.shape)
@@ -105,7 +104,7 @@ plt.legend(['Train, Test'], loc='lower right')
 
 plt.subplot(2, 1, 2)
 plt.plot(model_log.history['loss'])
-plt.plot(model_log.history['val_locc'])
+plt.plot(model_log.history['val_loss'])
 plt.title('Model loss')
 plt.ylabel('Loss')
 plt.xlabel('Epoch')
