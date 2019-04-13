@@ -60,26 +60,14 @@ print(y_train[0])
 
 ##model building
 model = Sequential()
-#convolutional layer with rectified linear unit activation
 model.add(Conv2D(32, kernel_size=(3, 3), activation='relu', input_shape=input_shape))
-#32 convolution filters used each of size 3x3
-#again
 model.add(Conv2D(64, (3, 3), activation='relu'))
-#64 convolution filters used each of size 3x3
-#choose the best features via pooling
 model.add(MaxPooling2D(pool_size=(2, 2)))
-#randomly turn neurons on and off to improve convergence
 model.add(Dropout(0.25))
-#flatten since too many dimensions, we only want a classification output
 model.add(Flatten())
-#fully connected to get all relevant datas
 model.add(Dense(128, activation='relu'))
-#one more dropout for convergence' sake :)
 model.add(Dropout(0.5))
-#output a softmax to squash the matrix into output probabilities
 model.add(Dense(num_category, activation='softmax'))
-#Adaptive learning rate (adaDelta) is a popular form of gradient descent rivaled only by adam and adagrad
-#categorical ce since we have multiple classes (10)
 model.compile(loss=keras.losses.categorical_crossentropy, optimizer=keras.optimizers.Adadelta(), metrics=['accuracy'])
 
 batch_size = 128
