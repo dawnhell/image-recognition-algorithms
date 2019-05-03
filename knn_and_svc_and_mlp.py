@@ -33,10 +33,10 @@ labels = le.fit_transform(labels)
 (trainX, testX, trainY, testY) = train_test_split(data, labels, test_size=0.25, random_state=42)
 
 #k-NN
-# print("[INFO] evaluating k-NN classifier...")
-# model = KNeighborsClassifier(n_neighbors=args["neighbors"], n_jobs=args["jobs"])
-# model.fit(trainX, trainY)
-# print(classification_report(testY, model.predict(testX), target_names=le.classes_))
+print("[INFO] evaluating k-NN classifier...")
+model = KNeighborsClassifier(n_neighbors=args["neighbors"], n_jobs=args["jobs"])
+model.fit(trainX, trainY)
+print(classification_report(testY, model.predict(testX), target_names=le.classes_))
 
 
 #SVM
